@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="DarkModeUI.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:DarkModeUI.ViewModels">
+    <ContentPage.BindingContext>
+        <vm:MainPageViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="{AppThemeBinding Light=Black, Dark=White}" />
+            <Setter Property="FontSize" Value="{OnIdiom Tablet=Medium, Phone=Small}" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="StackLayout">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=Black}" />
+        </Style>
+        <Style TargetType="RadioButton">
+
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=Black}" />
+        </Style>
+
+    </ContentPage.Resources>
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+
+            <ScrollView HeightRequest="200">
+                <StackLayout BackgroundColor="Blue" HeightRequest="400" />
+            </ScrollView>
+            <Entry
+                BackgroundColor="Blue"
+                HorizontalOptions="FillAndExpand"
+                Placeholder="Sample Text" />
+            <StackLayout>
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="{OnIdiom Tablet=27,
+                                       Phone=25}"
+                    LineBreakMode="WordWrap"
+                    Text="Change Theme:" />
+                <StackLayout
+                    RadioButtonGroup.GroupName="Theme"
+                    RadioButtonGroup.SelectedValue="{Binding SelectedTheme}"
+                    Spacing="15">
+                    <StackLayout Padding="20,0,0,0" Orientation="Horizontal">
+                        <RadioButton
+                            GroupName="Theme"
+                            IsChecked="{Binding ThemeSystem}"
+                            Value="System" />
+                        <Label Text="System" />
+                    </StackLayout>
+                    <StackLayout Padding="20,0,0,0" Orientation="Horizontal">
+                        <RadioButton
+                            GroupName="Theme"
+                            IsChecked="{Binding ThemeLight}"
+                            Value="Light" />
+                        <Label Text="Light" />
+                    </StackLayout>
+                    <StackLayout Padding="20,0,0,0" Orientation="Horizontal">
+                        <RadioButton
+                            GroupName="Theme"
+                            IsChecked="{Binding ThemeDark}"
+                            Value="Dark" />
+                        <Label Text="Dark" />
+                    </StackLayout>
+                </StackLayout>
+                <FlexLayout Margin="0,10,0,0">
+                    <Button
+                        BackgroundColor="Transparent"
+                        Command="{Binding SaveSettings}"
+                        FontSize="22"
+                        Text="Save"
+                        TextColor="Blue" />
+                </FlexLayout>
+            </StackLayout>
+        </StackLayout>
+
+    </AbsoluteLayout>
+
+</ContentPage>
